@@ -12,6 +12,7 @@ body{
     font-size: 100%;
     font-family: Arial, Verdana, sans-serif;
     margin-bottom: 10rem;
+    background: url("../images/bg.png") center -5px repeat;
 }
 
 .container{
@@ -21,7 +22,7 @@ body{
 
 /*Header*/
 header{
-    background: burlywood;
+    background: black;
     padding: 2rem 0 2rem 0;
 }
 
@@ -31,7 +32,7 @@ header{
 
 #logo a{
     text-decoration: none;
-    color: #313026;
+    color: #ffffff;
     font-size: 1rem;
 }
 
@@ -44,4 +45,25 @@ header{
 #date{
     margin-top: 2rem;
     /*display: inline-block;*/
+}
+
+
+
+/*Film lijst*/
+.film{
+    /*outline: 1px solid red;*/
+    float: left;
+    margin-top: 2rem;
+    background: #f1f1f1;
+    padding: 1rem;
+}
+
+.filmImage{
+    float: left;
+    width: 10rem;
+    margin-right: 1rem;
+}
+
+.filmTitel{
+    margin-bottom: 0.3rem;
 }
