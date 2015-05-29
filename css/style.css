@@ -1,0 +1,47 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+html{
+    min-height: 100%;
+    position: relative;
+}
+
+body{
+    font-size: 100%;
+    font-family: Arial, Verdana, sans-serif;
+    margin-bottom: 10rem;
+}
+
+.container{
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/*Header*/
+header{
+    background: burlywood;
+    padding: 2rem 0 2rem 0;
+}
+
+#logo{
+
+}
+
+#logo a{
+    text-decoration: none;
+    color: #313026;
+    font-size: 1rem;
+}
+
+
+/*Body*/
+.introMessage{
+    margin-top: 2rem;
+}
+
+#date{
+    margin-top: 2rem;
+    /*display: inline-block;*/
+}
