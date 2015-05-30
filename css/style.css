@@ -11,8 +11,18 @@ html{
 body{
     font-size: 100%;
     font-family: Arial, Verdana, sans-serif;
-    margin-bottom: 10rem;
+    /*margin-bottom: 10rem;*/
     background: url("../images/bg.png") center -5px repeat;
+    background-attachment: fixed;
+}
+
+#wrapper{
+    max-width: 1000px;
+    margin: 0 auto;
+    background: #ffffff;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 10rem;
 }
 
 .container{
@@ -40,10 +50,12 @@ header{
 /*Body*/
 .introMessage{
     margin-top: 2rem;
+    margin-left: 1rem;
 }
 
 #date{
     margin-top: 2rem;
+    margin-left: 1rem;
     /*display: inline-block;*/
 }
 
@@ -54,7 +66,7 @@ header{
     /*outline: 1px solid red;*/
     float: left;
     margin-top: 2rem;
-    background: #f1f1f1;
+    background: #ffffff;
     padding: 1rem;
 }
 
@@ -64,6 +76,77 @@ header{
     margin-right: 1rem;
 }
 
+.filmContent{
+
+}
+
 .filmTitel{
     margin-bottom: 0.3rem;
+}
+
+.uur{
+    float: left;
+    margin-top: -3rem;
+    margin-left: 12rem;
+
+
+}
+
+.uur a{
+    text-decoration: none;
+    border: 1px solid black;
+    padding: 0.2rem;
+    color: black;
+    margin-left: 0.5rem;
+}
+
+.uur a:first-child{
+    margin-left: 0;
+}
+
+.uur a:hover{
+    background: black;
+    color: #ffffff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*Helpers*/
+/*
+clearfix hack
+http://nicolasgallagher.com/micro-clearfix-hack/
+*/
+.clearFix:before, .clearFix:after {
+    content: " ";
+    display: table;
+}
+.clearFix:after {
+    clear: both;
+}
+
+/*enkel voor IE6/7 */
+.clearFix {
+    zoom: 1;
+}
+
+
+.clear{
+    clear: both;
 }

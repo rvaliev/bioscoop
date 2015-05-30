@@ -17,7 +17,6 @@
     </script>
 </head>
 <body>
-
 <header class="clearFix">
     <div class="container">
         <div id="logo">
@@ -26,90 +25,104 @@
     </div>
 </header>
 
-
-<section class="clearFix">
-    <div class="container">
-        <div class="introMessage">
-            <h1>Kies een film</h1>
+<div id="wrapper">
+    <section class="clearFix">
+        <div class="container">
+            <div class="introMessage">
+                <h1>Kies een film</h1>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
 
-<section class="clearFix">
-    <div class="container">
-        <div class="film">
-            <img class="filmImage" src="images/imitation_game.jpg" alt="film"/>
-            <h1 class="filmTitel">THE IMITATION GAME</h1>
-            The Imitation Game is een indrukwekkend drama over het leven en werk van Alan
-            Turing (Benedict Cumberbatch), de briljante maar emotioneel gecompliceerde Britse
-            wetenschapper die met zijn werk de Tweede Wereldoorlog hielp te verkorten en daarmee
-            de levens van tienduizenden mensen heeft gered.
+    <section class="clearFix">
+        <div class="container">
+            <div class="film">
+                <img class="filmImage" src="images/imitation_game.jpg" alt="film"/>
+                <h1 class="filmTitel">THE IMITATION GAME</h1>
+                <p>
+                    The Imitation Game is een indrukwekkend drama over het leven en werk van Alan
+                    Turing (Benedict Cumberbatch), de briljante maar emotioneel gecompliceerde Britse
+                    wetenschapper die met zijn werk de Tweede Wereldoorlog hielp te verkorten en daarmee
+                    de levens van tienduizenden mensen heeft gered.
+                    </p>
+            </div>
+            <div class="uur clearFix">
+                Kies uur:
+                <a href="#">12:00</a>
+                <a href="#">12:00</a>
+                <a href="#">12:00</a>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<section class="clearFix ">
-    <div class="container">
-        <div class="film">
-            <img class="filmImage" src="images/avengers.jpg" alt="film"/>
-            <h1 class="filmTitel">AVENGERS 2 : AGE OF ULTRON</h1>
-            Marvel Studios presenteert Avengers: Age of Ultron, het epische vervolg op de
-            grootste superheldenfilm aller tijden.
+    <section class="clearFix ">
+        <div class="container">
+            <div class="film">
+                <img class="filmImage" src="images/avengers.jpg" alt="film"/>
+                <h1 class="filmTitel">AVENGERS 2 : AGE OF ULTRON</h1>
+                Marvel Studios presenteert Avengers: Age of Ultron, het epische vervolg op de
+                grootste superheldenfilm aller tijden.
+            </div>
         </div>
-    </div>
-</section>
-
-<section class="clearFix ">
-    <div class="container">
-        <div class="film">
-            <img class="filmImage" src="images/citizenfour.jpg" alt="film"/>
-            <h1 class="filmTitel">CITIZENFOUR</h1>
-            Citizenfour is het Oscarwinnende, derde deel van Laura Poitras' trilogie over het
-            Amerika van na 11 september. Poitras was al een paar jaar met de film bezig toen
-            ze in januari 2013 gecodeerde e-mails ontving van een anonieme bron, citizen four,
-            de man die later bekend werd als Edward Snowden. Een beklemmende documentaire
-            thriller van ooggetuigen over één van de meest spraakmakende schandalen van het
-            afgelopen decennium: een schandaal waarvan de volle omvang tot op heden nog altijd
-            niet duidelijk is
+        <div class="uur clearFix">
+            Kies uur:
+            <a href="#">12:00</a>
+            <a href="#">12:00</a>
+            <a href="#">12:00</a>
         </div>
-    </div>
-</section>
+    </section>
 
-<section class="clearFix ">
-    <div class="container">
-        <div class="film">
-            <img class="filmImage" src="images/ff_7.jpg" alt="film"/>
-            <h1 class="filmTitel">FAST AND FURIOUS 7</h1>
-            Fast & Furious gaat volle gas vooruit! Vin Diesel, Paul Walker en Dwayne Johnson
-            nemen opnieuw de hoofdrollen voor hun rekening in Fast & Furious 7. In het zevende
-            deel van de succesvolle franchise geregisseerd door James Wan keren ook Michelle
-            Rodriguez, Jordana Brewster, Tyrese Gibson, Chris "Ludacris" Bridges, Elsa Pataky en
-            Lucas Black terug. Ze worden vergezeld door een nieuwe internationale sterrencast
-            waaronder Jason Statham, Djimon Hounsou, Tony Jaa, Ronda Rousey en Kurt Russell.
-            Neal H. Moritz, Vin Diesel en Michael Fottrell produceren de film gebaseerd op een
-            origineel idee van Chris Morgan.
+    <section class="clearFix ">
+        <div class="container">
+            <div class="film">
+                <img class="filmImage" src="images/citizenfour.jpg" alt="film"/>
+                <h1 class="filmTitel">CITIZENFOUR</h1>
+                Citizenfour is het Oscarwinnende, derde deel van Laura Poitras' trilogie over het
+                Amerika van na 11 september. Poitras was al een paar jaar met de film bezig toen
+                ze in januari 2013 gecodeerde e-mails ontving van een anonieme bron, citizen four,
+                de man die later bekend werd als Edward Snowden. Een beklemmende documentaire
+                thriller van ooggetuigen over één van de meest spraakmakende schandalen van het
+                afgelopen decennium: een schandaal waarvan de volle omvang tot op heden nog altijd
+                niet duidelijk is
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<section class="clearFix ">
-    <div class="container">
-        <div class="film">
-            <img class="filmImage" src="images/ff_7.jpg" alt="film"/>
-            <h1 class="filmTitel">FAST AND FURIOUS 7</h1>
-            Fast & Furious gaat volle gas vooruit! Vin Diesel, Paul Walker en Dwayne Johnson
-            nemen opnieuw de hoofdrollen voor hun rekening in Fast & Furious 7. In het zevende
-            deel van de succesvolle franchise geregisseerd door James Wan keren ook Michelle
-            Rodriguez, Jordana Brewster, Tyrese Gibson, Chris "Ludacris" Bridges, Elsa Pataky en
-            Lucas Black terug. Ze worden vergezeld door een nieuwe internationale sterrencast
-            waaronder Jason Statham, Djimon Hounsou, Tony Jaa, Ronda Rousey en Kurt Russell.
-            Neal H. Moritz, Vin Diesel en Michael Fottrell produceren de film gebaseerd op een
-            origineel idee van Chris Morgan.
+    <section class="clearFix ">
+        <div class="container">
+            <div class="film">
+                <img class="filmImage" src="images/ff_7.jpg" alt="film"/>
+                <h1 class="filmTitel">FAST AND FURIOUS 7</h1>
+                Fast & Furious gaat volle gas vooruit! Vin Diesel, Paul Walker en Dwayne Johnson
+                nemen opnieuw de hoofdrollen voor hun rekening in Fast & Furious 7. In het zevende
+                deel van de succesvolle franchise geregisseerd door James Wan keren ook Michelle
+                Rodriguez, Jordana Brewster, Tyrese Gibson, Chris "Ludacris" Bridges, Elsa Pataky en
+                Lucas Black terug. Ze worden vergezeld door een nieuwe internationale sterrencast
+                waaronder Jason Statham, Djimon Hounsou, Tony Jaa, Ronda Rousey en Kurt Russell.
+                Neal H. Moritz, Vin Diesel en Michael Fottrell produceren de film gebaseerd op een
+                origineel idee van Chris Morgan.
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
+    <section class="clearFix ">
+        <div class="container">
+            <div class="film">
+                <img class="filmImage" src="images/ff_7.jpg" alt="film"/>
+                <h1 class="filmTitel">FAST AND FURIOUS 7</h1>
+                Fast & Furious gaat volle gas vooruit! Vin Diesel, Paul Walker en Dwayne Johnson
+                nemen opnieuw de hoofdrollen voor hun rekening in Fast & Furious 7. In het zevende
+                deel van de succesvolle franchise geregisseerd door James Wan keren ook Michelle
+                Rodriguez, Jordana Brewster, Tyrese Gibson, Chris "Ludacris" Bridges, Elsa Pataky en
+                Lucas Black terug. Ze worden vergezeld door een nieuwe internationale sterrencast
+                waaronder Jason Statham, Djimon Hounsou, Tony Jaa, Ronda Rousey en Kurt Russell.
+                Neal H. Moritz, Vin Diesel en Michael Fottrell produceren de film gebaseerd op een
+                origineel idee van Chris Morgan.
+            </div>
+        </div>
+    </section>
+</div>
 <footer>
 
 </footer>

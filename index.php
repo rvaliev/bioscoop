@@ -48,7 +48,7 @@ if(isset($_POST['kiesDatum']))
         </div>
         <div id="date">
             <form action="#" method="post">
-                <label for="gekozenDatum">Kies een datum:</label>
+                <label for="gekozenDatum">Kies een programmatiedatum:</label>
                 <input type="text" id="datepicker" name="gekozenDatum">
                 <input type="submit" value="Verder" name="kiesDatum"/>
             </form>
