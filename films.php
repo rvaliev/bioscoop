@@ -29,7 +29,7 @@
     <section class="clearFix">
         <div class="container">
             <div class="introMessage">
-                <h1>Kies een film</h1>
+                <h1>Programmatie voor 30/05/2015 (<a href="index.php">andere datum kiezen</a>)</h1>
             </div>
         </div>
     </section>

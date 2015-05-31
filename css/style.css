@@ -113,6 +113,58 @@ header{
 
 
 
+/*Zaal*/
+
+.zaal{
+    margin: 0 auto;
+    margin-top: 3rem;
+    border: 1px solid red;
+    border-collapse: collapse;
+}
+
+.tableCaption{
+    font-size: 1.3rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+}
+
+td{
+    background: #ffffff;
+}
+
+th {
+    padding: 0.5rem;
+}
+
+td:hover{
+    background: red;
+    color: red;
+}
+
+td a{
+    text-decoration: none;
+    color: #ffffff;
+    padding: 1rem;
+    display: block;
+}
+
+.bestelForm{
+    margin-top: 0.5rem;
+}
+
+.naamField, .emailField{
+    height: 1.5rem;
+    padding-left: 0.5rem;
+    margin-bottom: 0.5rem;
+    width: 12rem;
+}
+
+
+.fullHeight{
+    height: 100vh;
+}
+
+
 
 
 
