@@ -1,0 +1,40 @@
+{% extends "main.twig" %}
+
+{% block content %}
+
+<section class="clearFix">
+    <div class="container">
+        <div class="introMessage">
+            <h1>Programmatie voor 30/05/2015 (<a href="index.php">andere datum kiezen</a>)</h1>
+        </div>
+    </div>
+</section>
+
+
+
+{% for film in filmLijst %}
+
+<section class="clearFix">
+    <div class="container">
+        <div class="film">
+            <img class="filmImage" src="src/ProjectBioscoop/presentation/images/{{ film.filmImage }}" alt="film"/>
+            <h1 class="filmTitel">{{ film.filmNaam }}</h1>
+            <p>
+                {{ film.filmOmschrijving }}
+            </p>
+        </div>
+        <div class="uur clearFix">
+            Kies uur:
+            {% for uur in film.filmProgrammatie %}
+                <a href="zaal.php?programmatie={{ uur.programmatieId }}">{{ uur.programmatieTijd }}</a>
+
+
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endfor %}
+
+
+{% endblock %}
