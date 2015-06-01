@@ -110,6 +110,14 @@ header{
 }
 
 
+.unabledHour{
+    text-decoration: line-through;
+    border: 1px solid black;
+    padding: 0.2rem;
+    color: black;
+    margin-left: 0.5rem;
+}
+
 
 
 
@@ -163,8 +171,6 @@ td a{
 .fullHeight{
     height: 100vh;
 }
-
-
 
 
 

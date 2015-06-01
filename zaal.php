@@ -1,90 +1,67 @@
-<!DOCTYPE html>
-<html lang="nl">
-<head>
-    <meta charset="utf-8">
-    <title>Bioscoop - zaal</title>
-    <!--    <link rel="stylesheet" href="css/jquery-ui.css">-->
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <link rel="stylesheet" href="../../../css/style.css">
-    <script src="../../../js/jquery-1.11.3.min.js"></script>
-    <script src="../../../js/jquery-ui.js"></script>
-    <script src="../../../js/scripts.js"></script>
+<?php
 
-    <script>
-        $(function() {
-            $( "#datepicker" ).datepicker({ firstDay: 1, minDate: 0}).datepicker( "option", "dateFormat", "DD, d MM, yy" );
-        });
-    </script>
-</head>
-<body>
-<header class="clearFix">
-    <div class="container">
-        <div id="logo">
-            <a href="#">Bioscoop</a>
-        </div>
-    </div>
-</header>
+use src\ProjectBioscoop\business\ZaalBusiness;
+use src\ProjectBioscoop\business\ProgrammatieBusiness;
+use src\ProjectBioscoop\exceptions\ZaalBestaatNietException;
+use Doctrine\Common\ClassLoader;
 
-<div id="wrapper">
-    <section class="clearFix">
-        <div class="container">
-            <div class="introMessage">
-                <h1>Film: The Imitation Game (<a href="films.php">wijzigen</a>)</h1>
-                <h2>Datum: 30/05/2015 (<a href="index.php">wijzigen</a>)</h2>
-                <h2>Uur: 12:00 (<a href="films.php">wijzigen</a>)</h2>
-            </div>
-        </div>
-    </section>
+/**
+ * Load Doctrine autoloader
+ */
+require_once'Doctrine/Common/ClassLoader.php';
+$classLoader = new ClassLoader("src");
+$classLoader->register();
+
+/**
+ * Check if $_GET['programmatie'] exists, and if $_GET['programmatie'] is a number, and if $_GET['programmatie'] >= 0
+ */
+if ((isset($_GET['programmatie'])) && (is_numeric($_GET['programmatie'])) && ($_GET['programmatie'] >= 0))
+{
+    try
+    {
+        /**
+         * Getting 'Programmatie' row by 'programmatie_id'.
+         */
+        $programmatieObj = new ProgrammatieBusiness();
+        $zaalId = $programmatieObj->overzichtProgrammatieById($_GET['programmatie']);
+        $zaalId = $zaalId[0]['zaal_id'];
+
+        /**
+         * Getting information about 'Zaal'
+         */
+        $zaalObj = new ZaalBusiness();
+        $zaal = $zaalObj->getZaalGrootte($zaalId);
+
+        /**
+         * Throw exception if $zaal is empty, which means it doesn't exist
+         */
+        if(empty($zaal)) throw new ZaalBestaatNietException();
 
 
-    <section class="clearFix">
-        <div class="container">
-            <table border="1" class="zaal">
-                <caption class="tableCaption">Kies een zetel in zaal nummer 1</caption>
-                <?php
-                $x = 12;
-                $y = 10;
-                echo "<tr>";
-                echo "<th></th>";
-                for($j = 1; $j <= $y; $j++)
-                {
-                    echo "<th>Zetel $j</th>";
-                }
-                echo "</tr>";
 
-                for($i = 1; $i <= $x; $i++)
-                {
-                    echo "<tr>";
-                    echo "<th>Rij $i</th>";
-                    for($j = 1; $j <= $y; $j++)
-                    {
-                        echo "<td>";
-                        echo "<a href='zaal.php?rij=" . $i . "&kolom=" . $j . "'></a>";
-                        echo "</td>";
-                    }
-                    echo "</tr>";
+        require_once("lib/Twig/Autoloader.php");
+        Twig_Autoloader::register();
+        $loader = new Twig_Loader_Filesystem("src/ProjectBioscoop/presentation");
+        $twig = new Twig_Environment($loader);
 
-                }
-                ?>
-            </table>
-
-            <img src="http://www.vdabantwerpen.be/php/barcode/generate.php?code=ruslan" alt=""/>
-        </div>
-    </section>
+        $view = $twig->render("zaal.twig", array("zaal" => $zaal[0], "currentTime" => date('H:i')));
+        print($view);
+    }
+    catch (ZaalBestaatNietException $e)
+    {
+        /**
+         * todo: redirect user if Zaal doesn't exist
+         */
+        echo "Zaal bestaat niet";
+    }
+}
+else
+{
+    header("Location: films.php");
+}
 
 
 
 
 
 
-
-</div>
-<footer>
-
-</footer>
-
-
-
-
-</body>
-</html>

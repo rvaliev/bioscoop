@@ -26,9 +26,11 @@
         <div class="uur clearFix">
             Kies uur:
             {% for uur in film.filmProgrammatie %}
-                <a href="zaal.php?programmatie={{ uur.programmatieId }}">{{ uur.programmatieTijd }}</a>
-
-
+                {% if uur.programmatieTijd > currentTime %}
+                    <a href="zaal.php?programmatie={{ uur.programmatieId }}">{{ uur.programmatieTijd }}</a>
+                {% else %}
+                    <span class="unabledHour">{{ uur.programmatieTijd }}</span>
+                {% endif %}
             {% endfor %}
         </div>
     </div>

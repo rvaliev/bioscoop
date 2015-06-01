@@ -1,0 +1,42 @@
+{% extends "main.twig" %}
+
+{% block content %}
+
+<section class="clearFix">
+    <div class="container">
+        <div class="introMessage">
+            <h1>Film: The Imitation Game (<a href="films.php">wijzigen</a>)</h1>
+            <h2>Datum: 30/05/2015 (<a href="index.php">wijzigen</a>)</h2>
+            <h2>Uur: 12:00 (<a href="films.php">wijzigen</a>)</h2>
+        </div>
+    </div>
+</section>
+
+
+<section class="clearFix">
+    <div class="container">
+        <table border="1" class="zaal">
+            <caption class="tableCaption">Kies een zetel in zaal nummer 1</caption>
+
+                <tr>
+                    <th></th>
+                    {% for j in 1..zaal.zaal_kolommen %}
+                        <th>Zetel {{ j }}</th>
+                    {% endfor %}
+                </tr>
+
+                {% for i in 1..zaal.zaal_rijen %}
+                    <tr>
+                        <th>Rij {{ i }}</th>
+                        {% for j in 1..zaal.zaal_kolommen %}
+                            <td>
+                                <a href='zaal.php?rij={{ i }}&kolom={{ j }}'></a>
+                            </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+        </table>
+    </div>
+</section>
+
+{% endblock %}

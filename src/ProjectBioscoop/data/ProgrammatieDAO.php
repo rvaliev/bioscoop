@@ -62,4 +62,28 @@ class ProgrammatieDAO
         }
     }
 
+
+    public function getProgrammatieRecordsById($programmatieId)
+    {
+        self::connectToDB();
+        $this->sql = "SELECT * FROM programmatie WHERE programmatie_id = ?";
+
+        try
+        {
+            $this->query = $this->handler->prepare($this->sql);
+            $this->query->execute(array($programmatieId));
+            $this->result = $this->query->fetchAll(PDO::FETCH_ASSOC);
+
+            $this->query->closeCursor();
+            $this->handler = null;
+
+            return $this->result;
+        }
+        catch (Exception $e)
+        {
+            echo "Error: query failure";
+            return false;
+        }
+    }
+
 }

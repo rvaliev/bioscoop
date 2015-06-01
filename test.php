@@ -1,6 +1,7 @@
 <?php
 
-use src\ProjectBioscoop\business\FilmsBusiness;
+use src\ProjectBioscoop\business\ZaalBusiness;
+use src\ProjectBioscoop\exceptions\ZaalBestaatNietException;
 use Doctrine\Common\ClassLoader;
 
 
@@ -8,24 +9,30 @@ require_once'Doctrine/Common/ClassLoader.php';
 $classLoader = new ClassLoader("src");
 $classLoader->register();
 
+try
+{
+    $zaalId = 3;
+
+    $obj = new ZaalBusiness();
+    $zaal = $obj->getZaalGrootte($zaalId);
+
+    if(empty($zaal)) throw new ZaalBestaatNietException();
+}
+catch (ZaalBestaatNietException $e)
+{
+    /**
+     * todo: redirect user if Zaal doesn't exist
+     */
+    echo "Zaal bestaat niet";
+}
 
 
 
-$obj = new FilmsBusiness();
-$films = $obj->overzichtFilms();
-
-
-
-/*require_once("lib/Twig/Autoloader.php");
-Twig_Autoloader::register();
-$loader = new Twig_Loader_Filesystem("src/ProjectBrood/presentation");
-$twig = new Twig_Environment($loader);
-
-$view = $twig->render("brood.twig", array("broden" => $broden, "authorized" => $_SESSION['user']['authorized'], "totaalBestellingPrijs" => $_SESSION['totaalBestellingPrijs']));
-print($view);*/
 
 
 
 echo "<pre>";
-print_r($films);
+print_r($zaal);
 echo "</pre>";
+
+

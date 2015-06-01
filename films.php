@@ -37,6 +37,6 @@ Twig_Autoloader::register();
 $loader = new Twig_Loader_Filesystem("src/ProjectBioscoop/presentation");
 $twig = new Twig_Environment($loader);
 
-$view = $twig->render("films.twig", array("filmLijst" => $filmLijst));
+$view = $twig->render("films.twig", array("filmLijst" => $filmLijst, "currentTime" => date('H:i')));
 print($view);
 
