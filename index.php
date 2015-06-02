@@ -1,14 +1,7 @@
 <?php
 
 
-
-
-if (isset($_POST['kiesDatum']))
-{
-    echo "<pre>";
-    print_r($_POST);
-    echo "</pre>";
-}
+session_start();
 
 
 

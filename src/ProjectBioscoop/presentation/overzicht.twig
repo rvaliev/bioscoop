@@ -1,0 +1,40 @@
+{% extends "main.twig" %}
+
+{% block content %}
+
+
+<section class="clearFix">
+    <div class="container">
+        <div class="introMessage">
+            <h1>Overzicht van reservatie</h1>
+            <br>
+            <h3>Film: {{ filmNaam }} (<a href="films.php">wijzigen</a>)</h3>
+            <h3>Datum: {{ gekozenDatum }} (<a href="index.php">wijzigen</a>)</h3>
+            <h3>Uur: {{ programmatieTijd }} (<a href="films.php">wijzigen</a>)</h3>
+            <h3>Zaal nummer: {{ zaalId }} (<a href="films.php">wijzigen</a>)</h3>
+            <h3>Rij: {{ rij }} - Plaats: {{ kolom }} (<a href="films.php">wijzigen</a>)</h3>
+            <br>
+            <p>Vul persoonlijke gegevens in om bestelling af te ronden:</p>
+            <form class="bestelForm" action="betaling.php" method="post">
+                <input class="naamField" type="text" name="userName" placeholder="Naam"/>
+                <br>
+                <input class="emailField" type="text" name="userName" placeholder="E-mail"/>
+                <br>
+                <input type="submit" name="bestelBtn" value="Bestel"/>
+            </form>
+
+        </div>
+    </div>
+</section>
+
+
+<section class="clearFix">
+    <div class="container">
+
+
+
+    </div>
+</section>
+
+
+{% endblock %}

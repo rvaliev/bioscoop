@@ -47,7 +47,8 @@ class ProgrammatieDAO
 
 
 
-            foreach ($this->result as $row) {
+            foreach ($this->result as $row)
+            {
                 $this->time = new DateTime($row['programmatietijd']);
                 $row['programmatietijd'] = $this->time->format('H:i');
                 $this->lijst[] = new Programmatie($row['programmatie_id'], $row['zaal_id'], $row['film_id'], $row['programmatietijd']);

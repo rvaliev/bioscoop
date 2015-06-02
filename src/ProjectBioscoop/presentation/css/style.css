@@ -156,6 +156,12 @@ td a{
     display: block;
 }
 
+.gereserveerd{
+    background: red;
+    color: red;
+}
+
+
 .bestelForm{
     margin-top: 0.5rem;
 }

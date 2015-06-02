@@ -16,4 +16,11 @@ class FilmsBusiness
         return $this->lijst;
     }
 
+    public function overzichtEenFilm($filmId)
+    {
+        $this->filmsDAO = new FilmsDAO();
+        $this->lijst = $this->filmsDAO->getFilmById($filmId);
+        return $this->lijst;
+    }
+
 }

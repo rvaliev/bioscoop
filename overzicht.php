@@ -1,75 +1,73 @@
-<!DOCTYPE html>
-<html lang="nl">
-<head>
-    <meta charset="utf-8">
-    <title>Bioscoop - overzicht</title>
-    <!--    <link rel="stylesheet" href="css/jquery-ui.css">-->
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <link rel="stylesheet" href="../../../css/style.css">
-    <script src="../../../js/jquery-1.11.3.min.js"></script>
-    <script src="../../../js/jquery-ui.js"></script>
-    <script src="../../../js/scripts.js"></script>
+<?php
 
-    <script>
-        $(function() {
-            $( "#datepicker" ).datepicker({ firstDay: 1, minDate: 0}).datepicker( "option", "dateFormat", "DD, d MM, yy" );
-        });
-    </script>
-</head>
-<body>
-<header class="clearFix">
-    <div class="container">
-        <div id="logo">
-            <a href="#">Bioscoop</a>
-        </div>
-    </div>
-</header>
-
-<div id="wrapper" class="fullHeight">
-    <section class="clearFix">
-        <div class="container">
-            <div class="introMessage">
-                <h1>Overzicht van reservatie</h1>
-                <br>
-                <h3>Film: The Imitation Game (<a href="films.php">wijzigen</a>)</h3>
-                <h3>Datum: 30/05/2015 (<a href="index.php">wijzigen</a>)</h3>
-                <h3>Uur: 12:00 (<a href="films.php">wijzigen</a>)</h3>
-                <br>
-                <p>Vul persoonlijke gegevens in om bestelling af te ronden:</p>
-                <form class="bestelForm" action="#" method="post">
-                    <input class="naamField" type="text" name="userName" placeholder="Naam"/>
-                    <br>
-                    <input class="emailField" type="text" name="userName" placeholder="E-mail"/>
-                    <br>
-                    <input type="submit" name="bestelBtn" value="Bestel"/>
-                </form>
-
-            </div>
-        </div>
-    </section>
+use src\ProjectBioscoop\business\FilmsBusiness;
+use Doctrine\Common\ClassLoader;
+use src\ProjectBioscoop\exceptions\OngeldigeInputException;
+ob_start();
+session_start();
 
 
-    <section class="clearFix">
-        <div class="container">
+try {
+    /**
+     * Load Doctrine autoloader
+     */
+    require_once'Doctrine/Common/ClassLoader.php';
+    $classLoader = new ClassLoader("src");
+    $classLoader->register();
+
+    /**
+     * If there's no '$_SESSION['programmatie']', which means that hour (within movie) on page 'films.php'
+     * wasn't selected, then return user to 'films.php' to make the choice.
+     */
+    if (!isset($_SESSION['programmatie'])) throw new OngeldigeInputException();
+
+    /**
+     * Check whether 'rij' and 'kolom' are provided, otherwise return user to 'films.php' to make the choice.
+     */
+    if (!isset($_GET['rij']) && !isset($_GET['kolom'])) throw new OngeldigeInputException();
+
+    $rij = $_GET['rij'];
+    $kolom = $_GET['kolom'];
+
+    /**
+     * Check whether 'rij' and 'kolom' are positive numbers, otherwise return user to 'films.php' to make the choice.
+     */
+    if ((!is_numeric($rij) && $rij < 1) && (!is_numeric($kolom) && $kolom < 1)) throw new OngeldigeInputException();
+
+    if(($rij > $_SESSION['zaalInfo']['zaal_rijen']) || $kolom > $_SESSION['zaalInfo']['zaal_kolommen']) throw new OngeldigeInputException();
+
+    foreach ($_SESSION['reservaties'] as $reservatie) {
+        if(($rij == $reservatie['rij']) && ($kolom == $reservatie['kolom'])) throw new OngeldigeInputException();
+    echo "<pre>";
+    print_r($reservatie);
+    echo "</pre>";
+    }
 
 
+    /**
+     * Load twig template
+     */
+    require_once("lib/Twig/Autoloader.php");
+    Twig_Autoloader::register();
+    $loader = new Twig_Loader_Filesystem("src/ProjectBioscoop/presentation");
+    $twig = new Twig_Environment($loader);
 
-        </div>
-    </section>
+    $view = $twig->render("overzicht.twig", array("gekozenDatum" => $_SESSION['gekozenDatum'], "rij" => $rij, "kolom" => $kolom, "programmatie" => $_SESSION['programmatie'], "filmNaam" => $_SESSION['filmNaam'], "programmatieTijd" => $_SESSION['programmatieTijd'], "zaalId" => $_SESSION['zaalInfo']['zaal_id']));
+    print($view);
 
 
-
-
-
-
-
-</div>
-<footer>
-
-</footer>
+        echo "<pre>";
+        print_r($_SESSION);
+        echo "</pre>";
 
 
 
 
-</body>
-</html>
+}
+catch (OngeldigeInputException $e)
+{
+    header("Location: films.php");
+}
+
+
+ob_flush();

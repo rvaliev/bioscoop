@@ -5,9 +5,9 @@
 <section class="clearFix">
     <div class="container">
         <div class="introMessage">
-            <h1>Film: The Imitation Game (<a href="films.php">wijzigen</a>)</h1>
-            <h2>Datum: 30/05/2015 (<a href="index.php">wijzigen</a>)</h2>
-            <h2>Uur: 12:00 (<a href="films.php">wijzigen</a>)</h2>
+            <h1>Film: {{ filmNaam }} (<a href="films.php">wijzigen</a>)</h1>
+            <h2>Datum: {{ gekozenDatum }} (<a href="index.php">wijzigen</a>)</h2>
+            <h2>Uur: {{ programmatieTijd.0 }}:{{ programmatieTijd.1 }} (<a href="films.php">wijzigen</a>)</h2>
         </div>
     </div>
 </section>
@@ -16,7 +16,7 @@
 <section class="clearFix">
     <div class="container">
         <table border="1" class="zaal">
-            <caption class="tableCaption">Kies een zetel in zaal nummer 1</caption>
+            <caption class="tableCaption">Kies een zetel in zaal nummer {{ zaal.zaal_id }}</caption>
 
                 <tr>
                     <th></th>
@@ -29,13 +29,23 @@
                     <tr>
                         <th>Rij {{ i }}</th>
                         {% for j in 1..zaal.zaal_kolommen %}
-                            <td>
-                                <a href='zaal.php?rij={{ i }}&kolom={{ j }}'></a>
-                            </td>
+                            {% for reservatie in reservaties if reservatie.rij == i and reservatie.kolom == j %}
+                                <td class="gereserveerd">
+                                    {#<a href='zaal.php?rij={{ i }}&kolom={{ j }}'></a>#}
+                                </td>
+                                {% else %}
+                                    <td>
+                                        <a href='overzicht.php?rij={{ i }}&kolom={{ j }}'></a>
+                                    </td>
+                            {% endfor %}
                         {% endfor %}
                     </tr>
                 {% endfor %}
         </table>
+
+
+
+
     </div>
 </section>
 

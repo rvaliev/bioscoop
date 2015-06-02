@@ -1,20 +1,18 @@
 <?php
 
 namespace src\ProjectBioscoop\data;
-use src\ProjectBioscoop\entities\Films;
-use src\ProjectBioscoop\entities\Programmatie;
+use src\ProjectBioscoop\entities\Reservaties;;
 use src\ProjectBioscoop\data\DBConnect;
 use PDO;
 use Exception;
 
 
-class FilmsDAO
+class ReservatiesDAO
 {
     private $result;
     private $handler;
     private $sql;
     private $query;
-    private $programmatie;
 
     private $lijst;
 
@@ -34,7 +32,7 @@ class FilmsDAO
     public function getAll()
     {
         self::connectToDB();
-        $this->sql = "SELECT * FROM films";
+        $this->sql = "SELECT * FROM reservaties";
 
         try
         {
@@ -46,10 +44,7 @@ class FilmsDAO
 
             foreach ($this->result as $row)
             {
-                $this->programmatie = new ProgrammatieDAO();
-                $this->programmatie = $this->programmatie->getProgrammatieTijdByFilmId($row['film_id']);
-
-                $this->lijst[] = new Films($row['film_id'], $row['film_naam'], $row['film_omschrijving'], $row['film_image'], $this->programmatie);
+                $this->lijst[] = new Reservaties($row['reservatie_id'], $row['user_id'], $row['rij'], $row['kolom'], $row['reservatie_datum'], $row['programmatie_id'], $row['reservatie_code']);
             }
 
             return $this->lijst;
@@ -62,15 +57,15 @@ class FilmsDAO
     }
 
 
-    public function getFilmById($filmId)
+    public function getReservatieByProgrammatieIdEnDatum($programmatieId, $datum)
     {
         self::connectToDB();
-        $this->sql = "SELECT * FROM films WHERE film_id = ?";
+        $this->sql = "SELECT * FROM reservaties WHERE programmatie_id = ? AND reservatie_datum = ?";
 
         try
         {
             $this->query = $this->handler->prepare($this->sql);
-            $this->query->execute(array($filmId));
+            $this->query->execute(array($programmatieId, $datum));
             $this->result = $this->query->fetchAll(PDO::FETCH_ASSOC);
 
             $this->query->closeCursor();
@@ -78,7 +73,7 @@ class FilmsDAO
 
             foreach ($this->result as $row)
             {
-                $this->lijst[] = new Films($row['film_id'], $row['film_naam'], $row['film_omschrijving'], $row['film_image'], 0);
+                $this->lijst[] = new Reservaties($row['reservatie_id'], $row['user_id'], $row['rij'], $row['kolom'], $row['reservatie_datum'], $row['programmatie_id'], $row['reservatie_code']);
             }
             return $this->lijst;
         }
@@ -88,6 +83,5 @@ class FilmsDAO
             return false;
         }
     }
-
 
 }

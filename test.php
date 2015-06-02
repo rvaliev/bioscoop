@@ -1,38 +1,27 @@
 <?php
-
-use src\ProjectBioscoop\business\ZaalBusiness;
-use src\ProjectBioscoop\exceptions\ZaalBestaatNietException;
+use src\ProjectBioscoop\business\ReservatiesBusiness;
 use Doctrine\Common\ClassLoader;
 
-
+session_start();
 require_once'Doctrine/Common/ClassLoader.php';
 $classLoader = new ClassLoader("src");
 $classLoader->register();
 
-try
+
+$reservatieObj = new ReservatiesBusiness();
+$reservatieLijst = $reservatieObj->overzichtReservatieByProgrammatieIdEnDatum(1, "2015-06-06");
+
+foreach ($reservatieLijst as $lijsKey => $lijst)
 {
-    $zaalId = 3;
 
-    $obj = new ZaalBusiness();
-    $zaal = $obj->getZaalGrootte($zaalId);
-
-    if(empty($zaal)) throw new ZaalBestaatNietException();
+    $reservatieArray[$lijsKey]['rij'] = $lijst->getZaalRij();
+    $reservatieArray[$lijsKey]['kolom'] = $lijst->getZaalKolom();
 }
-catch (ZaalBestaatNietException $e)
-{
-    /**
-     * todo: redirect user if Zaal doesn't exist
-     */
-    echo "Zaal bestaat niet";
-}
-
-
-
 
 
 
 echo "<pre>";
-print_r($zaal);
+print_r($reservatieArray);
 echo "</pre>";
 
 
