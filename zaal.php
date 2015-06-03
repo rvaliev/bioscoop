@@ -11,6 +11,8 @@ ob_start();
 
 session_start();
 
+$_SESSION['errors'] = "";
+
 /**
  * Load Doctrine autoloader
  */

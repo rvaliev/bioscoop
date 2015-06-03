@@ -1,4 +1,5 @@
 <?php
+
 use src\ProjectBioscoop\business\ReservatiesBusiness;
 use Doctrine\Common\ClassLoader;
 
@@ -9,19 +10,19 @@ $classLoader->register();
 
 
 $reservatieObj = new ReservatiesBusiness();
-$reservatieLijst = $reservatieObj->overzichtReservatieByProgrammatieIdEnDatum(1, "2015-06-06");
+$reservatie = $reservatieObj->voegNieuweReservatie($userId = 1, $rij = 10, $kolom = 10, "2015-06-15", 1, "hkhkhjhjkk");
 
-foreach ($reservatieLijst as $lijsKey => $lijst)
-{
 
-    $reservatieArray[$lijsKey]['rij'] = $lijst->getZaalRij();
-    $reservatieArray[$lijsKey]['kolom'] = $lijst->getZaalKolom();
-}
+
 
 
 
 echo "<pre>";
-print_r($reservatieArray);
+print_r($lijst);
 echo "</pre>";
+
+
+
+
 
 

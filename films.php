@@ -5,6 +5,7 @@ use src\ProjectBioscoop\exceptions\OngeldigeInputException;
 use Doctrine\Common\ClassLoader;
 session_start();
 
+$_SESSION['errors'] = "";
 
 $currentDate = date("d/m/Y");
 

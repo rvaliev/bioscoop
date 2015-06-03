@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - bioscoop@localhost" uuid="a8042d69-075e-4411-8947-6abc1d981d45">
+    <database-info product="MySQL" version="5.5.38" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.34 ( Revision: jess.balint@oracle.com-20141014163213-wqbwpf1ok2kvo1om )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="mixed" quoted-identifiers="upper"/>
+    <schema name="" catalog="bioscoop"/>
+    <table name="films" schema="" catalog="bioscoop" type="TABLE">
+      <column name="film_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="film_naam" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="film_omschrijving" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="film_image" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="film_id"/>
+      <exported-key name="programmatie_ibfk_1" table="programmatie" schema="" catalog="bioscoop" columns="film_id"/>
+    </table>
+    <table name="programmatie" schema="" catalog="bioscoop" type="TABLE">
+      <column name="programmatie_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="zaal_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="film_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="programmatietijd" sqlType="TIME" precision="8" scale="0" nullable="false" jdbcType="92"/>
+      <primary-key name="PRIMARY" columns="programmatie_id"/>
+      <foreign-key name="programmatie_ibfk_1" columns="film_id" ref-table="films" ref-schema="" ref-catalog="bioscoop" ref-columns="film_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="programmatie_ibfk_2" columns="zaal_id" ref-table="zalen" ref-schema="" ref-catalog="bioscoop" ref-columns="zaal_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="reservaties_ibfk_2" table="reservaties" schema="" catalog="bioscoop" columns="programmatie_id"/>
+    </table>
+    <table name="reservaties" schema="" catalog="bioscoop" type="TABLE">
+      <column name="reservatie_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="user_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="rij" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="kolom" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="reservatie_datum" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="programmatie_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="reservatie_code" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="reservatie_id"/>
+      <foreign-key name="reservaties_ibfk_1" columns="user_id" ref-table="users" ref-schema="" ref-catalog="bioscoop" ref-columns="user_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="reservaties_ibfk_2" columns="programmatie_id" ref-table="programmatie" ref-schema="" ref-catalog="bioscoop" ref-columns="programmatie_id" update-rule="3" delete-rule="3" deferrability="2"/>
+    </table>
+    <table name="users" schema="" catalog="bioscoop" type="TABLE">
+      <column name="user_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="user_voornaam" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="user_familienaam" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="user_email" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="user_id"/>
+      <exported-key name="reservaties_ibfk_1" table="reservaties" schema="" catalog="bioscoop" columns="user_id"/>
+      <index name="user_email" unique="true" columns="user_email"/>
+    </table>
+    <table name="zalen" schema="" catalog="bioscoop" type="TABLE">
+      <column name="zaal_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="zaal_rijen" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="zaal_kolommen" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="zaal_id"/>
+      <exported-key name="programmatie_ibfk_2" table="programmatie" schema="" catalog="bioscoop" columns="zaal_id"/>
+    </table>
+  </data-source>
+</component>

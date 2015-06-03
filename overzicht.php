@@ -26,21 +26,43 @@ try {
      */
     if (!isset($_GET['rij']) && !isset($_GET['kolom'])) throw new OngeldigeInputException();
 
-    $rij = $_GET['rij'];
-    $kolom = $_GET['kolom'];
+    $_SESSION['gekozenRij'] = $rij = $_GET['rij'];
+    $_SESSION['gekozenKolom'] = $kolom = $_GET['kolom'];
 
     /**
      * Check whether 'rij' and 'kolom' are positive numbers, otherwise return user to 'films.php' to make the choice.
      */
     if ((!is_numeric($rij) && $rij < 1) && (!is_numeric($kolom) && $kolom < 1)) throw new OngeldigeInputException();
 
+    /**
+     * Check whether choosen 'rij' and 'kolom' are within the table range
+     */
     if(($rij > $_SESSION['zaalInfo']['zaal_rijen']) || $kolom > $_SESSION['zaalInfo']['zaal_kolommen']) throw new OngeldigeInputException();
 
+    /**
+     * Check whether choosen 'rij' and 'kolom' aren't already reserved in case if user wants to smart out the code by putting the wrong data by hand
+     */
     foreach ($_SESSION['reservaties'] as $reservatie) {
         if(($rij == $reservatie['rij']) && ($kolom == $reservatie['kolom'])) throw new OngeldigeInputException();
-    echo "<pre>";
-    print_r($reservatie);
-    echo "</pre>";
+    }
+
+
+    /**
+     * Defining values of input fields from form
+     */
+    if(!isset($_SESSION['voornaam']))
+    {
+        $_SESSION['voornaam'] = "";
+    }
+
+    if(!isset($_SESSION['familienaam']))
+    {
+        $_SESSION['familienaam'] = "";
+    }
+
+    if(!isset($_SESSION['email']))
+    {
+        $_SESSION['email'] = "";
     }
 
 
@@ -52,15 +74,8 @@ try {
     $loader = new Twig_Loader_Filesystem("src/ProjectBioscoop/presentation");
     $twig = new Twig_Environment($loader);
 
-    $view = $twig->render("overzicht.twig", array("gekozenDatum" => $_SESSION['gekozenDatum'], "rij" => $rij, "kolom" => $kolom, "programmatie" => $_SESSION['programmatie'], "filmNaam" => $_SESSION['filmNaam'], "programmatieTijd" => $_SESSION['programmatieTijd'], "zaalId" => $_SESSION['zaalInfo']['zaal_id']));
+    $view = $twig->render("overzicht.twig", array("gekozenDatum" => $_SESSION['gekozenDatum'], "rij" => $rij, "kolom" => $kolom, "programmatie" => $_SESSION['programmatie'], "filmNaam" => $_SESSION['filmNaam'], "programmatieTijd" => $_SESSION['programmatieTijd'], "zaalId" => $_SESSION['zaalInfo']['zaal_id'], "errors" => $_SESSION['errors'], "voornaam" => $_SESSION['voornaam'], "familienaam" => $_SESSION['familienaam'], "email" => $_SESSION['email']));
     print($view);
-
-
-        echo "<pre>";
-        print_r($_SESSION);
-        echo "</pre>";
-
-
 
 
 }

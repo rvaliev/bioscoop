@@ -22,4 +22,12 @@ class ReservatiesBusiness
         return $this->lijst;
     }
 
+
+    public function voegNieuweReservatie($userId, $rij, $kolom, $reservatieDatum, $programmatieId, $reservatieCode)
+    {
+        $this->reservatiesDAO = new ReservatiesDAO();
+        $this->lijst = $this->reservatiesDAO->insertNewReservation($userId, $rij, $kolom, $reservatieDatum, $programmatieId, $reservatieCode);
+        return $this->lijst;
+    }
+
 }

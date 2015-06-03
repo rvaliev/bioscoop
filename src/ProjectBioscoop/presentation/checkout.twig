@@ -1,0 +1,18 @@
+{% extends "main.twig" %}
+
+{% block content %}
+
+<section class="clearFix">
+    <div class="container">
+        <div class="introMessage">
+            <h1>Uw zitplaats is gereserveerd</h1>
+            <br>
+            <p>Uw reservatiecode:</p>
+            <img src="http://www.vdabantwerpen.be/php/barcode/generate.php?code={{ reservatieCode }}" alt=""/>
+        </div>
+    </div>
+</section>
+
+
+
+{% endblock %}

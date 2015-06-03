@@ -11,7 +11,6 @@ class DBConnect
 
     public function startConnection()
     {
-//        include('config.php');
         try
         {
             $this->handler = new PDO('mysql:

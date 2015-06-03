@@ -1,13 +1,13 @@
 <?php
 
 namespace src\ProjectBioscoop\data;
-use src\ProjectBioscoop\entities\Reservaties;;
+use src\ProjectBioscoop\entities\Users;
 use src\ProjectBioscoop\data\DBConnect;
 use PDO;
 use Exception;
 
 
-class ReservatiesDAO
+class UsersDAO
 {
     private $result;
     private $handler;
@@ -32,7 +32,7 @@ class ReservatiesDAO
     public function getAll()
     {
         self::connectToDB();
-        $this->sql = "SELECT * FROM reservaties";
+        $this->sql = "SELECT * FROM users";
 
         try
         {
@@ -44,7 +44,7 @@ class ReservatiesDAO
 
             foreach ($this->result as $row)
             {
-                $this->lijst[] = new Reservaties($row['reservatie_id'], $row['user_id'], $row['rij'], $row['kolom'], $row['reservatie_datum'], $row['programmatie_id'], $row['reservatie_code']);
+                $this->lijst[] = new Users($row['user_id'], $row['user_voornaam'], $row['user_familienaam'], $row['user_email']);
             }
 
             return $this->lijst;
@@ -57,15 +57,17 @@ class ReservatiesDAO
     }
 
 
-    public function getReservatieByProgrammatieIdEnDatum($programmatieId, $datum)
+
+
+    public function getUserByEmail($userEmail)
     {
         self::connectToDB();
-        $this->sql = "SELECT * FROM reservaties WHERE programmatie_id = ? AND reservatie_datum = ?";
+        $this->sql = "SELECT * FROM users WHERE user_email = ?";
 
         try
         {
             $this->query = $this->handler->prepare($this->sql);
-            $this->query->execute(array($programmatieId, $datum));
+            $this->query->execute(array($userEmail));
             $this->result = $this->query->fetchAll(PDO::FETCH_ASSOC);
 
             $this->query->closeCursor();
@@ -73,7 +75,7 @@ class ReservatiesDAO
 
             foreach ($this->result as $row)
             {
-                $this->lijst[] = new Reservaties($row['reservatie_id'], $row['user_id'], $row['rij'], $row['kolom'], $row['reservatie_datum'], $row['programmatie_id'], $row['reservatie_code']);
+                $this->lijst[] = new Users($row['user_id'], $row['user_voornaam'], $row['user_familienaam'], $row['user_email']);
             }
             return $this->lijst;
         }
@@ -85,23 +87,28 @@ class ReservatiesDAO
     }
 
 
-    public function insertNewReservation($userId, $rij, $kolom, $reservatieDatum, $programmatieId, $reservatieCode)
+
+    public function insertNewUser($userVoornaam, $userFamilienaam, $userEmail)
     {
         self::connectToDB();
-        $this->sql = "INSERT INTO reservaties (user_id, rij, kolom, reservatie_datum, programmatie_id, reservatie_code) VALUES (?, ?, ?, ?, ?, ?)";
+        $this->sql = "INSERT INTO users (user_voornaam, user_familienaam, user_email) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE user_id=LAST_INSERT_ID(user_id)";
 
         try
         {
             $this->query = $this->handler->prepare($this->sql);
-            $this->query->execute(array($userId, $rij, $kolom, $reservatieDatum, $programmatieId, $reservatieCode));
+            $this->query->execute(array($userVoornaam, $userFamilienaam, $userEmail));
+//            $this->result = $this->query->fetchAll(PDO::FETCH_ASSOC);
+            $lastInsertedOrderId = $this->handler->lastInsertId('user_id'); // Getting the id from last entry
 
             $this->query->closeCursor();
             $this->handler = null;
-            return true;
+
+            return $lastInsertedOrderId;
+//            return $this->result;
         }
         catch (Exception $e)
         {
-            echo "Error: query failure reservatie";
+            echo "Error: query failure users";
             return false;
         }
     }

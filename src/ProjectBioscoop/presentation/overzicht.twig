@@ -12,17 +12,22 @@
             <h3>Datum: {{ gekozenDatum }} (<a href="index.php">wijzigen</a>)</h3>
             <h3>Uur: {{ programmatieTijd }} (<a href="films.php">wijzigen</a>)</h3>
             <h3>Zaal nummer: {{ zaalId }} (<a href="films.php">wijzigen</a>)</h3>
-            <h3>Rij: {{ rij }} - Plaats: {{ kolom }} (<a href="films.php">wijzigen</a>)</h3>
+            <h3>Rij: {{ rij }} - Plaats: {{ kolom }} (<a href="zaal.php?programmatie={{ programmatie }}">wijzigen</a>)</h3>
             <br>
             <p>Vul persoonlijke gegevens in om bestelling af te ronden:</p>
             <form class="bestelForm" action="betaling.php" method="post">
-                <input class="naamField" type="text" name="userName" placeholder="Naam"/>
+                <input class="naamField" type="text" name="userName" value="{{ voornaam }}" placeholder="Voornaam"/>
                 <br>
-                <input class="emailField" type="text" name="userName" placeholder="E-mail"/>
+                <input class="naamField" type="text" name="userSurname" value="{{ familienaam }}" placeholder="Familienaam"/>
+                <br>
+                <input class="emailField" type="text" name="userEmail" value="{{ email }}" placeholder="E-mail"/>
                 <br>
                 <input type="submit" name="bestelBtn" value="Bestel"/>
             </form>
 
+            {% for error in errors %}
+                {{ error }}<br>
+            {% endfor %}
         </div>
     </div>
 </section>
